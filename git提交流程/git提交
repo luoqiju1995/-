@@ -3,7 +3,8 @@ echo "# -" >> README.md
 git init
 git add README.md
 git add .gitignore
-git add .gitignore
+git add .\git提交流程\
 git commit -m "first commit"
 git remote add origin https://github.com/luoqiju1995/learn_note.git
+git config --global http.sslverify false
 git push -u origin master
