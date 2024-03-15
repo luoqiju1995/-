@@ -1,0 +1,13 @@
+ht = f(ht-1, Xt)
+ht = tanh(WihXt + bih + Whh h(t-1) + bhh)
+
+每个节点输入是两部分，当前的x，和之前一个节点的输出
+WihXt + bih -> 对t时刻输入的处理
+Whh h(t-1) + bhh -> 对前一时刻输出的处理
+用 tanh 作为转换 得到 ht
+
+learn - (Whh, bhh, Wih, bih)
+
+对于每个 batch (Whh, bhh, Wih, bih)参数共享
+batch_first 3 * 5 * 10
+common 5 * 3 * 10

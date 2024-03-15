@@ -1,0 +1,24 @@
+Batch Norm  -- BuildBlock
+深度神经网络的标配  训练更快 稳健 部分解决过拟合
+norm  input
+BN    layer input
+
+Norm  ->  0 mean
+          1 std
+
+不改变 shape  1d N * d  ->  N * d
+             2d N * c * h * w  ->  N * c * h * w
+             3d N * c * d * h * w  -> N * c * d * h * w
+
+Batch 对一个批次内特征进行归一化
+
+
+
+BatchNorm1d(num-features)
+m.weight    1d   (10, )
+m.bias      1d   (10, )
+
+(x[:][0] - mu[0])/sigma[0] * gama[0] + beta[0]
+(x[:][1] - mu[1])/sigma[1] * gama[1] + beta[1]
+
+

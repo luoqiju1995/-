@@ -1,0 +1,20 @@
+W: input shape
+F: kernel size/pool size
+S: stride
+D: Dilation
+
+
+tensorflow/ops/nn_ops.py
+
+if padding == 'same'
+    output_spatial_shape[i] =
+        ceil(input_spatial_shape[i] / strides[i])
+
+
+if padding == 'valid':
+    output_spatial_shape[i] =
+        ceil(
+                (input_spatial_shape[i] -
+                     (spatial_filter_shape[i]-1)*dilation_rate[i]
+                /strides[i]
+        )

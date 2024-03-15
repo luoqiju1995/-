@@ -1,0 +1,18 @@
+nn.CrossEntropLoss
+计算过程
+input: logits(为经过softmax的模型的“输出”)
+    softmax(input)
+    -log(softmax(input))
+    用target做选择提取(关于log(softmax))
+    mean
+nn.CrossEntropyLoss = nn.NLLLOSS(nn.LogSoftmax) = nn.NLLLoss(torch.log(nn.Softmax(dim=1)(input)), target)
+
+tensor(2.4261, grad_fn=<NllLossBackward0>)
+tensor([[-0.3300, -2.6640, -2.8627, -2.1052, -3.4264],
+        [-0.7155, -2.1768, -1.9719, -3.4581, -1.4828],
+        [-2.1352, -3.1313, -2.1090, -1.6032, -0.6626]], grad_fn=<LogBackward0>)
+tensor([1, 4, 1])
+
+2.42603 = -(-2.6640 + -1.4828 + -3.1313)/3 = 2.4261
+
+
