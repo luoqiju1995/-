@@ -1,0 +1,8 @@
+maximum likelhood == minimize CrossEntropy Loss
+最大似然估计，估计的是参数(分布的参数)，以伯努利分布为例
+(Xi)1,...,N ~ B(p)
+p的概率为1， 1-p的概率为0， Xi 属于[0, 1)
+此时需要基于(Xi)1,...,N 来估计p
+
+似然: log e(p) = sigma(1toN) (Xi*log(p) + (1-Xi)*log(1-p))
+梯度: sigma(Xi)/p - sigma(1-Xi)/(1-p)
