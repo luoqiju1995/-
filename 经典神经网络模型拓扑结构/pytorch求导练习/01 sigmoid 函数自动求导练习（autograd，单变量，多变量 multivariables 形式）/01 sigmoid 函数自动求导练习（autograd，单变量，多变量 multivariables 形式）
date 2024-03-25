@@ -1,0 +1,55 @@
+1. sigmoid
+
+import torch
+import numpy as np
+from torch import nn
+
+x = torch.tensor(1., requires_grad=True)
+y = x.sigmoid()
+# temp = 1/(1+np.exp(-1))
+# print(temp)
+y.backward()
+# print(x.grad)
+print(x.sigmoid() * (1-x.sigmoid()))
+
+sigmoid = nn.Sigmoid()
+print(sigmoid(x) * (1-sigmoid(x)))
+
+# tensor(0.1966, grad_fn=<MulBackward0>)
+# tensor(0.1966, grad_fn=<MulBackward0>)
+
+
+1.1 multi variables 多元形式
+x = torch.tensor([1., 2., 3.], requires_grad=True)
+# print(x)
+y = x.sigmoid().sum()
+# print(y)
+y.backward()
+# print(x.grad)
+print(x.sigmoid() * (1-x.sigmoid()))
+sigmoid = nn.Sigmoid()
+print(sigmoid(x) * (1-sigmoid(x)))
+
+# tensor([0.1966, 0.1050, 0.0452], grad_fn=<MulBackward0>)
+# tensor([0.1966, 0.1050, 0.0452], grad_fn=<MulBackward0>)
+
+
+1.2自定义函数
+y = sigmoid**2(x)
+
+x = torch.tensor(2., requires_grad=True)
+# print(x)
+y = x.sigmoid() * x.sigmoid()
+# print(y)
+y.backward()
+print(x.grad)
+print(2*x.sigmoid()*(x.sigmoid() * (1-x.sigmoid())))
+sigmoid = nn.Sigmoid()
+print(2*sigmoid(x) * (sigmoid(x) * (1-sigmoid(x))))
+
+# tensor(0.1850)
+# tensor(0.1850, grad_fn=<MulBackward0>)
+# tensor(0.1850, grad_fn=<MulBackward0>)
+
+
+

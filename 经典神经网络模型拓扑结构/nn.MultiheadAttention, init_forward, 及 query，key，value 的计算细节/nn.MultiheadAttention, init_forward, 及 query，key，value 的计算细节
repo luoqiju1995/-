@@ -1,0 +1,22 @@
+12 N L(target-length) S(source-length)  => N L S
+
+  Q     K     V
+query  key  value
+
+init  embed-dim  num-heads  kdim  vidm
+forward            query                    key                  value
+            L N Eq(Eq=embed-dim)      S N Ek(Ek=kdim)      S N Ev(Ev=vidm)
+
+Wq = Eq * Eq    query * WqT     = Q L N Eq
+Wk = Eq * Ek    Key * WkT       = K S N Eq
+Wv = Eq * Ev    value * WvT     = V S N Eq
+
+      softmax(Q*KT/(dk**0.5))      *V
+Attention-output-scores(weights)
+                Attention-output
+N L Eq  *  N S Eq => N Eq S
+=> N L S  =>  N L S/(dk**0.5)  =>  N L S/(dk**0.5) * S N Eq
+=> N L S/(dk**0.5) * N S Eq (weight) =>  N L Eq/(dk**0.5) (output)
+
+
+

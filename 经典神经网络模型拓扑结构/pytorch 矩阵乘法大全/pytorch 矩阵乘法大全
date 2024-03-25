@@ -1,0 +1,11 @@
+torch.dot() 1d  不支持broadcast
+torch.mm() 2d  不支持broadcast
+torch.bmm() 1d  不支持broadcast
+torch.matmul()  支持broadcast
+@ = torch.matmul()
+* 按位相乘，需要完全相同
+
+m = [2, 4, 5]
+n = [4, 5, 3]
+m[1]要与n[2]相等
+torch.bmm(m, n)

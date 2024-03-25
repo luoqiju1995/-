@@ -1,0 +1,40 @@
+1.softmax
+
+"""
+z1  1.1         0.224       s1
+z2  2.2         0.672       s2
+z3  0.2         0.091       s3
+z4  1.7         0.013       s4
+"""
+from math import exp
+
+print(exp(1.1)/(exp(1.1)+exp(2.2)+exp(0.2)+exp(-1.7)), end=',')
+print(exp(2.2)/(exp(1.1)+exp(2.2)+exp(0.2)+exp(-1.7)), end=',')
+print(exp(0.2)/(exp(1.1)+exp(2.2)+exp(0.2)+exp(-1.7)), end=',')
+print(exp(-1.7)/(exp(1.1)+exp(2.2)+exp(0.2)+exp(-1.7)))
+
+import numpy as np
+
+def softmax(vector):
+    e = np.exp(vector)
+    return e/e.sum()
+
+logits = np.array([1.1, 2.2, 0.2, -1.7])
+print(softmax(logits))
+
+from scipy.special import softmax as sm
+print(sm(logits))
+
+import torch
+from torch import nn
+logits = torch.tensor([1.1, 2.2, 0.2, -1.7])
+print(nn.Softmax(dim=0)(logits))
+
+# 0.22363631207948945,0.6718406104698835,0.09092373930780046,0.013599338142826541
+# [0.22363631 0.67184061 0.09092374 0.01359934]
+# [0.22363631 0.67184061 0.09092374 0.01359934]
+# tensor([0.2236, 0.6718, 0.0909, 0.0136])
+
+
+1.1 特点 0-1，保序，概率和为1
+

@@ -1,0 +1,53 @@
+import torch
+from torch import nn
+import numpy as np
+from copy import deepcopy
+
+m = nn.BatchNorm1d(3)
+# print(m)
+x1 = torch.randint(0, 5, (2, 3), dtype=torch.float)
+# print(x1)
+# print(x1.mean(dim=0), x1.var(dim=0, unbiased=False))
+# print(x1 - x1.mean(dim=0)/torch.sqrt(x1.var(dim=0, unbiased=False) + 1e-5))
+print(m(x1))
+last_mean, last_var = deepcopy(m.running_mean), deepcopy(m.running_var)
+print(last_mean, last_var)
+print((1-0.1)*0 + 0.1*x1.mean(dim=0))
+print((1-0.1)*torch.ones(3) + 0.1*x1.var(dim=0))
+
+x2 = torch.randint(0, 5, (2, 3), dtype=torch.float)
+# print(x1)
+# print(x1.mean(dim=0), x1.var(dim=0, unbiased=False))
+# print(x1 - x1.mean(dim=0)/torch.sqrt(x1.var(dim=0, unbiased=False) + 1e-5))
+print(m(x2))
+last_mean, last_var = deepcopy(m.running_mean), deepcopy(m.running_var)
+print(last_mean, last_var)
+print((1-0.1)*0 + 0.1*x2.mean(dim=0))
+print((1-0.1)*torch.ones(3) + 0.1*x2.var(dim=0))
+
+# tensor([[-1.0000,  1.0000,  1.0000],
+#         [ 1.0000, -1.0000, -1.0000]], grad_fn=<NativeBatchNormBackward0>)
+# tensor([0.2500, 0.3500, 0.2500]) tensor([1.3500, 0.9500, 1.3500])
+# tensor([0.2500, 0.3500, 0.2500])
+# tensor([1.3500, 0.9500, 1.3500])
+# tensor([[ 1.0000,  1.0000,  0.0000],
+#         [-1.0000, -1.0000,  0.0000]], grad_fn=<NativeBatchNormBackward0>)
+# tensor([0.5750, 0.5650, 0.3250]) tensor([1.2650, 0.9050, 1.2150])
+# tensor([0.3500, 0.2500, 0.1000])
+# tensor([0.9500, 0.9500, 0.9000])
+
+x3 = torch.randint(0, 5, (2, 3), dtype=torch.float)
+# print(x3)
+m.eval()
+print(m(x3))
+print((x3 - x3.mean(dim=0))/torch.sqrt(x3.var(dim=0, unbiased=False) + 1e-5))
+print((x3 - m.running_mean)/torch.sqrt(m.running_var + 1e-5))
+
+# tensor([[-0.2732,  2.5664,  0.4309],
+#         [ 0.5674,  0.4098, -0.4763]], grad_fn=<NativeBatchNormBackward0>)
+# tensor([[-1.0000,  1.0000,  1.0000],
+#         [ 1.0000, -1.0000, -1.0000]])
+# tensor([[-0.2732,  2.5664,  0.4309],
+#         [ 0.5674,  0.4098, -0.4763]])
+
+
